@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import ProductCard from './ProductCard';
 
 const ProductList = ({ products, onRemove }) => {
@@ -23,6 +24,5 @@ const ProductList = ({ products, onRemove }) => {
     </div>
   );
 }
-
 
 export default ProductList;
