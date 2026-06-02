@@ -1,28 +1,20 @@
 import React from 'react';
-
-
 import ProductCard from './ProductCard';
 
 const ProductList = ({ products, onRemove }) => {
-  if (products.length === 0) {
-    return (
-      <div id='product-list'>
-        <p> Sorry, no products are available right now! Please check back later.</p>
-      </div>
-    );
+  // TODO: Check if the product list is empty and display a message if needed
+if(!products || products.length === 0)
+  {
+    return <p> No products.</p>;
   }
-
   return (
-    <div id='product-list'>
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          onRemove={onRemove}
-        />
-      ))}
-    </div>
+    /* TODO: Iterate over the products array and render a ProductCard for each product */
+    <>
+     {products.map((product) => (
+      <ProductCard key={product.id} product={product} onRemove = {onRemove} />
+     ))}
+    </>
   );
-}
+};
 
 export default ProductList;
