@@ -3,7 +3,7 @@ import ProductList from "./components/ProductList";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
-
+// Must match test's sampleProducts exactly
 const initialProducts = [
   { id: 1, name: "Laptop",  price: "$999", inStock: true },
   { id: 2, name: "Phone",   price: "$699", inStock: false },
@@ -14,7 +14,7 @@ function App() {
   const [products, setProducts] = useState(initialProducts);
   const [filter, setFilter] = useState("all");
 
-
+  // Remove product by id
   const handleRemove = (id) => {
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
