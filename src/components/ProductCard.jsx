@@ -1,26 +1,36 @@
 import React from 'react';
 import styles from '../styles/ProductCard.module.css';
+import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
 
-const ProductCard = ({ product, onRemove }) => {
+function ProductCard({ product, onRemove }) {
+  const { id, name, price, inStock } = product;
+
   return (
-    <div 
-      className={`${styles.card} ${!product.inStock ? `${styles.outOfStockClass} outOfStockClass` : ""}`}
-    >
-      <h3>{product.name}</h3>
+    <div className={`${styles.card} ${!inStock ? "outOfStockClass" : ""}`}>
+      <h2 className={styles.name}>{name}</h2>
+      <p className={styles.price}>{price}</p>
 
-      <p>{product.price}</p>
+      <Chip
+        label={inStock ? "In Stock" : "Out of Stock"}
+        color={inStock ? "success" : "error"}
+        size="small"
+        style={{ marginBottom: "0.8rem" }}
+      />
 
-      <p>
-        {product.inStock ? "In Stock" : "Out of Stock"}
-      </p>
-
-      <button onClick={() => onRemove(product.id)}>
-        Remove
-      </button>
       
+      <div>
+        <Button
+          variant="outlined"
+          color="error"
+          size="small"
+          onClick={() => onRemove(id)}
+        >
+          Remove
+        </Button>
+      </div>
     </div>
   );
-};
-
+}
 
 export default ProductCard;

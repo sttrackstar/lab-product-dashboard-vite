@@ -1,70 +1,43 @@
-import React, { useState } from 'react';
-import ProductList from './components/ProductList';
+import React, { useState } from "react";
+import ProductList from "./components/ProductList";
 import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
-const App = () => {
-  // TODO: Define initial product data
-  const initialProducts = 
-  [
-    {id: 1, name: "Laptop", price: 999, inStock: true},
-    {id: 2, name: "Phone", price: 699, inStock: false},
-    {id: 3, name: "Tablet", price: 199, inStock: true},
-    {id: 4, name: "Keyboard", price: 99, inStock: false},
-  ];
-const [products, setProducts] = useState(initialProducts);
 
-const handleRemove = (id) => {
- setProducts((prev) => prev.filter((product) => product.id !== id));
+const initialProducts = [
+  { id: 1, name: "Laptop",  price: "$999", inStock: true },
+  { id: 2, name: "Phone",   price: "$699", inStock: false },
+  { id: 3, name: "Tablet",  price: "$499", inStock: true },
+];
 
-};
-  // TODO: Implement state to manage filtering
+function App() {
+  const [products, setProducts] = useState(initialProducts);
   const [filter, setFilter] = useState("all");
-  // TODO: Implement logic to filter products based on availability
-  const filteredProducts = products.filter((products) => 
-    {
-      if (filter === "inStock") return products.inStock;
-      if (filter === "outOfStock") return !products.inStock;
-      return true;
-    });
-    
-    
+
+
+  const handleRemove = (id) => {
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  const filteredProducts = products.filter((p) => {
+    if (filter === "inStock") return p.inStock;
+    if (filter === "outOfStock") return !p.inStock;
+    return true;
+  });
 
   return (
-    <div>
+    <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto" }}>
       <h1>Product Dashboard</h1>
-      
-      {/* TODO: Add buttons to allow filtering by availability */}
-      <Button
-        variant="contained"
-        onClick={() => setFilter("all")}
-        style={{ marginRight: "10px"}}
-      >
-        All
-        </Button>
 
-      <Button
-        variant="contained"
-        color="success"
-        onClick={() => setFilter("inStock")}
-        style={{ marginRight: "10px" }}
-      >
-        In Stock
-      </Button>
+      <Stack direction="row" spacing={2} style={{ marginBottom: "1.5rem" }}>
+        <Button variant={filter === "all" ? "contained" : "outlined"} onClick={() => setFilter("all")}>All</Button>
+        <Button variant={filter === "inStock" ? "contained" : "outlined"} color="success" onClick={() => setFilter("inStock")}>In Stock</Button>
+        <Button variant={filter === "outOfStock" ? "contained" : "outlined"} color="error" onClick={() => setFilter("outOfStock")}>Out of Stock</Button>
+      </Stack>
 
-      <Button
-        variant="contained"
-        color="error"
-        onClick={() => setFilter("outOfStock")}
-      >
-        Out of Stock
-      </Button>
-
-      {/* Product List */}
       <ProductList products={filteredProducts} onRemove={handleRemove} />
-      {/* TODO: Render the ProductList component and pass filtered products */}
-      
     </div>
   );
-};
+}
 
 export default App;
