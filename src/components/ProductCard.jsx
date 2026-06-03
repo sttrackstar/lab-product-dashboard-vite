@@ -3,23 +3,13 @@ import styles from "../styles/ProductCard.module.css";
 
 const ProductCard = ({ product, removeProduct }) => {
   return (
-    <div
-      data-testid={`product-${product.id}`}
-      className={
-        product.inStock
-          ? "cardClass"
-          : "cardClass outOfStockClass"
-      }
-    >
-      <h3>{product.name}</h3>
-
-      <p>${product.price}</p>
-
-      {product.inStock ? <p>In Stock</p> : <p>Out of Stock</p>}
-
-      <button onClick={() => removeProduct(product.id)}>
-        Remove
-      </button>
+    <div>
+      <div className={styles.card}>
+        <h2>{product.name}</h2>
+        <p>Price: {product.price}</p>
+        <p>Status: {product.inStock ? "In Stock" : "Out of Stock"}</p>
+        <button onClick={() => removeProduct(product.id)}>Remove</button>
+      </div>
     </div>
   );
 };
